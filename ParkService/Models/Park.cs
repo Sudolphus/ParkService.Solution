@@ -11,5 +11,10 @@ namespace ParkService.Models
     [Required]
     [StringLength(20)]
     public string State { get; set; }
+
+    public string GetPropValues(string propName)
+    {
+      return this.GetType().GetProperty(propName).GetValue(this) as string;
+    }
   }
 }

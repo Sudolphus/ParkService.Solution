@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ParkService.Models;
@@ -24,15 +25,16 @@ namespace ParkService.Controllers
     public async Task<ActionResult<IEnumerable<Park>>> Get([FromQuery] ParkFilter filter)
     {
       IQueryable<Park> parkQuery = _db.Parks;
-      if (!string.IsNullOrEmpty(filter.Name))
+      PropertyInfo[] searchFields = filter.GetType().GetProperties();
+      foreach(PropertyInfo field in searchFields)
       {
-        Regex nameSearch = new Regex(filter.Name, RegexOptions.IgnoreCase);
-        parkQuery = parkQuery.Where(p => nameSearch.IsMatch(p.Name));
-      }
-      if (!string.IsNullOrEmpty(filter.State))
-      {
-        Regex stateSearch = new Regex(filter.State, RegexOptions.IgnoreCase);
-        parkQuery = parkQuery.Where(p => stateSearch.IsMatch(p.State));
+        string fieldName = field.Name;
+        string fieldValue = field.GetValue(filter) as string;
+        if (!string.IsNullOrEmpty(fieldValue))
+        {
+          Regex search = new Regex(fieldValue, RegexOptions.IgnoreCase);
+          parkQuery = parkQuery.Where(p => search.IsMatch(p.GetPropValues(fieldName)));
+        }
       }
       List<Park> parkList = await parkQuery.ToListAsync();
       return parkList;
