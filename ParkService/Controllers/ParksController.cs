@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ParkService.Models;
 
@@ -20,9 +21,20 @@ namespace ParkService.Controllers
 
     // GET api/parks
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Park>>> Get()
+    public async Task<ActionResult<IEnumerable<Park>>> Get([FromQuery] string name, [FromQuery] string state)
     {
-      List<Park> parkList = await _db.Parks.ToListAsync();
+      IQueryable<Park> parkQuery = _db.Parks;
+      if (!string.IsNullOrEmpty(name))
+      {
+        Regex nameSearch = new Regex(name, RegexOptions.IgnoreCase);
+        parkQuery = parkQuery.Where(p => nameSearch.IsMatch(p.Name));
+      }
+      if (!string.IsNullOrEmpty(state))
+      {
+        Regex stateSearch = new Regex(state, RegexOptions.IgnoreCase);
+        parkQuery = parkQuery.Where(p => stateSearch.IsMatch(p.State));
+      }
+      List<Park> parkList = await parkQuery.ToListAsync();
       return parkList;
     }
 
