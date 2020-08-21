@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Park.Migrations
+namespace ParkService.Migrations
 {
     public partial class Initial : Migration
     {

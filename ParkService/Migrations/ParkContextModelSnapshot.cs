@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ParkService.Models;
 
-namespace Park.Migrations
+namespace ParkService.Migrations
 {
     [DbContext(typeof(ParkContext))]
     partial class ParkContextModelSnapshot : ModelSnapshot

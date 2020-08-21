@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ParkService.Models;
 
-namespace Park.Migrations
+namespace ParkService.Migrations
 {
     [DbContext(typeof(ParkContext))]
     [Migration("20200821163855_Initial")]
