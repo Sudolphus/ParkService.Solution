@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="./ParkService/park.jpeg" alt="Project logo"></a>
+ <img src="./ParkService/park.jpeg" alt="Project logo"></a>
 </p>
 
 <h3 align="center">Park Service Registrar</h3>
@@ -26,8 +26,7 @@
 - [Getting Started](#getting_started)
 - [Usage](#usage)
 - [Built Using](#built_using)
-- [TODO](../TODO.md)
-- [Contributing](../CONTRIBUTING.md)
+- [TODO](./TODO.md)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
 
@@ -101,3 +100,4 @@ This program allows for cross-site scripting, so that the api can be called from
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
 - Thanks to [John Mccann](https://unsplash.com/@jmacca88) for the project image
+- Thanks to [Andrea Chiarelli of auth0.com](https://auth0.com/blog/authors/andrea-chiarelli/) for the tutorial on setting up JWT authorization
