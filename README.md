@@ -68,6 +68,11 @@ For example, `GET localhost:5000/api/parks` will return a list of all parks in t
 
 This program uses Swagger to document the available API calls. To access the Swagger page and see a full list of calls, please view `localhost:5000/Swagger` while the project is running.
 
+
+## CORS <a name="cors"></a>
+
+This program allows for cross-site scripting, so that the api can be called from any origin. To test this, you can use a site such as [Test-Cors](https://test-cors.org) to simulate a request.
+
 ## ⛏️ Built Using <a name = "built_using"></a>
 
 - [MySql Server](https://dev.mysql.com/) - Database
