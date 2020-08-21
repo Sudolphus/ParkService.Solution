@@ -87,6 +87,7 @@ This applicaton uses JWTs to authorize api calls. By default, the only calls tha
 
 2. Log in to your account by sending a POST request to `http://localhost:5000/api/users/login`, with a JSON body that matches what you sent for login. The server will respond by sending you a long string as a token.
 3. Add this token to your header as authorization to gain access to the remainder of the routes. In Postman, this can be done by toggling to the "Authorization" tab, selecting Bearer token from the drop-down list, and then pasting your token string into the input box.
+4. The authorization scheme includes a section for roles, and the DELETE route is locked behind the "Admin" role. To access the admin role, append the line `"admin": true"` to your register call listed in step one (as a note, this is a terrible way to do this in a production app, but it works as a demonstration here). When you log in with your admin account, the token provided will then allow you to DELETE.
    
 ## Swagger <a name="swagger"></a>
 
