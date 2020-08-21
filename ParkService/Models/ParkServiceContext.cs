@@ -9,6 +9,6 @@ namespace ParkService.Models
     }
 
     public DbSet<Park> Parks { get; set; }
-
+    public DbSet<User> Users { get; set; }
   }
 }
