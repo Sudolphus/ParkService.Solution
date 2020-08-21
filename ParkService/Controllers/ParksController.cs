@@ -18,18 +18,15 @@ namespace ParkService.Controllers
       _db = db;
     }
 
-    // GET api/values
+    // GET api/parks
     [HttpGet]
-    public ActionResult<IEnumerable<Park>> Get()
+    public async Task<ActionResult<IEnumerable<Park>>> Get()
     {
-      IEnumerable<Park> parkList = _db.Parks
-        .ToList()
-        .OrderBy(p => p.State)
-        .ThenBy(p => p.Name);
+      List<Park> parkList = await _db.Parks.ToListAsync();
       return parkList;
     }
 
-    // GET api/values/5
+    // GET api/parks/5
     [HttpGet("{id}")]
     public async Task<ActionResult<Park>> Get(int id)
     {
@@ -37,6 +34,30 @@ namespace ParkService.Controllers
       return park;
     }
 
+    //POST api/parks
+    [HttpPost]
+    public async Task Post([FromBody] Park park)
+    {
+      await _db.Parks.AddAsync(park);
+      await _db.SaveChangesAsync();
+    }
 
+    //PUT api/parks/5
+    [HttpPut("{id}")]
+    public async Task Put(int id, [FromBody] Park park)
+    {
+      park.ParkId = id;
+      _db.Entry(park).State = EntityState.Modified;
+      await _db.SaveChangesAsync();
+    }
+
+    //DELETE api/parks/5
+    [HttpDelete("{id}")]
+    public async Task Delete(int id)
+    {
+      Park park = await _db.Parks.FirstOrDefaultAsync(p => p.ParkId == id);
+      _db.Parks.Remove(park);
+      await _db.SaveChangesAsync();
+    }
   }
 }
