@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Security.Claims;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ParkService.Models;
@@ -49,7 +51,7 @@ namespace ParkService.Controllers
     }
 
     //POST api/parks
-    [HttpPost]
+    [HttpPost, Authorize]
     public async Task Post([FromBody] Park park)
     {
       await _db.Parks.AddAsync(park);
@@ -57,7 +59,7 @@ namespace ParkService.Controllers
     }
 
     //PUT api/parks/5
-    [HttpPut("{id}")]
+    [HttpPut("{id}"), Authorize]
     public async Task Put(int id, [FromBody] Park park)
     {
       park.ParkId = id;
@@ -66,7 +68,7 @@ namespace ParkService.Controllers
     }
 
     //DELETE api/parks/5
-    [HttpDelete("{id}")]
+    [HttpDelete("{id}"), Authorize]
     public async Task Delete(int id)
     {
       Park park = await _db.Parks.FirstOrDefaultAsync(p => p.ParkId == id);
