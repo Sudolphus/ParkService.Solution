@@ -73,7 +73,7 @@ namespace ParkService.Controllers
     }
 
     //DELETE api/parks/5
-    [HttpDelete("{id}"), Authorize]
+    [HttpDelete("{id}"), Authorize(Roles = "Admin")]
     public async Task Delete(int id)
     {
       Park park = await _db.Parks.FirstOrDefaultAsync(p => p.ParkId == id);
