@@ -4,7 +4,7 @@ namespace ParkService.Models
 {
   public class ParkContext : DbContext
   {
-    public ParkContext(DbContextOptions<ParkContext> options)
+    public ParkContext(DbContextOptions<ParkContext> options) : base(options)
     {
     }
 
