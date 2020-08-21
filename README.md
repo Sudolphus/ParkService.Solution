@@ -61,9 +61,25 @@ These instructions will get you a copy of the project up and running on your loc
 
 Once the program is running, you can interact with the database by sending api requests to `localhost:5000/api`.
 
-For example, `GET localhost:5000/api/parks` will return a list of all parks in the database. For a full listing of available commands, see the [Swagger document](#swagger-)
+For example, `GET http://localhost:5000/api/parks` will return a list of all parks in the database. For a full listing of available commands, see the [Swagger document](#swagger-)
 
+Note that the PUT, POST, and DELETE requests will require authorization, which is done via JWT tokens. For information on acquiring and using a JWT token, please see the section on [Authorization](#authorization-)
 
+## Authorization <a name="token"></a>
+
+This applicaton uses JWTs to authorize api calls. By default, the only calls that are legal without a token are the GETs on parks and the user register and login POSTs. To obtain a token:
+1. Create an account by sending a POST request to `http://localhost:5000/api/users/register`, with a JSON body of:
+   ```
+   {
+     "userName": "{your_name}",
+     "password": "{your_password}:
+   }
+   ```
+   In Postman, this can be done by toggling to the "Body" tab, then selecting the "raw" and "JSON" objects, and entering the above with the username and password of your choice.
+
+2. Log in to your account by sending a POST request to `http://localhost:5000/api/users/login`, with a JSON body that matches what you sent for login. The server will respond by sending you a long string as a token.
+3. Add this token to your header as authorization to gain access to the remainder of the routes. In Postman, this can be done by toggling to the "Authorization" tab, selecting Bearer token from the drop-down list, and then pasting your token string into the input box.
+   
 ## Swagger <a name="swagger"></a>
 
 This program uses Swagger to document the available API calls. To access the Swagger page and see a full list of calls, please view `localhost:5000/Swagger` while the project is running.
