@@ -23,6 +23,7 @@ namespace ParkService.Controllers
     }
 
     // GET api/parks
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Park>>> Get([FromQuery] ParkFilter filter)
     {
@@ -43,6 +44,7 @@ namespace ParkService.Controllers
     }
 
     // GET api/parks/5
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<ActionResult<Park>> Get(int id)
     {

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System.Linq;
 using ParkService.Models;
 
@@ -10,10 +11,12 @@ namespace ParkService.Controllers
   public class UserController : ControllerBase
   {
     private ParkContext _db;
+    private IConfiguration _config;
 
-    public UserController(ParkContext db)
+    public UserController(ParkContext db, IConfiguration config)
     {
       _db = db;
+      _config = config;
     }
 
     [AllowAnonymous]
@@ -21,6 +24,7 @@ namespace ParkService.Controllers
     public void Register([FromBody] User user)
     {
       _db.Users.Add(user);
+      _db.SaveChanges();
     }
 
     [AllowAnonymous]
@@ -32,7 +36,9 @@ namespace ParkService.Controllers
         User user = _db.Users
           .Where(u => u.UserName == login.UserName)
           .First(u => u.Password == login.Password);
-        string tokenString = user.BuildToken();
+        string key = _config["Jwt:Key"];
+        string issuer = _config["Jwt:Issuer"];
+        string tokenString = user.BuildToken(key, issuer);
         return Ok(new { token = tokenString });
       }
       catch

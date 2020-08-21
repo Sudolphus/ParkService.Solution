@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -11,21 +10,20 @@ namespace ParkService.Models
     public int UserId { get; set; }
     public string UserName { get; set; }
     public string Password { get; set; }
-    private IConfiguration _config;
-    public User(string userName, string password, IConfiguration config)
+
+    public User(string userName, string password)
     {
       this.UserName = userName;
       this.Password = password;
-      this._config = config;
     }
 
-    public string BuildToken()
+    public string BuildToken(string stringkey, string issuer)
     {
-      SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+      SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(stringkey));
       SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-      JwtSecurityToken token = new JwtSecurityToken(_config["Jwt:Issuer"],
-        _config["Jwt:Issuer"],
+      JwtSecurityToken token = new JwtSecurityToken(issuer,
+        issuer,
         expires: DateTime.Now.AddMinutes(30),
         signingCredentials: creds);
 
