@@ -61,9 +61,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 Once the program is running, you can interact with the database by sending api requests to `localhost:5000/api`.
 
-For example, `GET http://localhost:5000/api/parks` will return a list of all parks in the database. For a full listing of available commands, see the [Swagger document](#swagger-)
+For example, `GET http://localhost:5000/api/parks` will return a list of all parks in the database. For a full listing of available commands, see the [Swagger document](#swagger)
 
-Note that the PUT, POST, and DELETE requests will require authorization, which is done via JWT tokens. For information on acquiring and using a JWT token, please see the section on [Authorization](#authorization-)
+Note that the PUT, POST, and DELETE requests will require authorization, which is done via JWT tokens. For information on acquiring and using a JWT token, please see the section on [Authorization](#token)
 
 ## Authorization <a name="token"></a>
 
@@ -72,7 +72,7 @@ This applicaton uses JWTs to authorize api calls. By default, the only calls tha
    ```
    {
      "userName": "{your_name}",
-     "password": "{your_password}:
+     "password": "{your_password}"
    }
    ```
    In Postman, this can be done by toggling to the "Body" tab, then selecting the "raw" and "JSON" objects, and entering the above with the username and password of your choice.
