@@ -21,17 +21,17 @@ namespace ParkService.Controllers
 
     // GET api/parks
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Park>>> Get([FromQuery] string name, [FromQuery] string state)
+    public async Task<ActionResult<IEnumerable<Park>>> Get([FromQuery] ParkFilter filter)
     {
       IQueryable<Park> parkQuery = _db.Parks;
-      if (!string.IsNullOrEmpty(name))
+      if (!string.IsNullOrEmpty(filter.Name))
       {
-        Regex nameSearch = new Regex(name, RegexOptions.IgnoreCase);
+        Regex nameSearch = new Regex(filter.Name, RegexOptions.IgnoreCase);
         parkQuery = parkQuery.Where(p => nameSearch.IsMatch(p.Name));
       }
-      if (!string.IsNullOrEmpty(state))
+      if (!string.IsNullOrEmpty(filter.State))
       {
-        Regex stateSearch = new Regex(state, RegexOptions.IgnoreCase);
+        Regex stateSearch = new Regex(filter.State, RegexOptions.IgnoreCase);
         parkQuery = parkQuery.Where(p => stateSearch.IsMatch(p.State));
       }
       List<Park> parkList = await parkQuery.ToListAsync();
