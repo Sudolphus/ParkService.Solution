@@ -1,15 +1,15 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
+ <img width=200px height=200px src="./ParkService/park.jpeg" alt="Project logo"></a>
 </p>
 
-<h3 align="center">Park Registrar</h3>
+<h3 align="center">Park Service Registrar</h3>
 
 <div align="center">
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
+[![GitHub Issues](https://img.shields.io/github/issues/Sudolphus/ParkService.Solution.svg)](https://github.com/Sudolphus/ParkService.Solution/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/Sudolphus/ParkService.Solution.svg)](https://github.com/Sudolphus/ParkService.Solution/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 </div>
@@ -24,7 +24,6 @@
 
 - [About](#about)
 - [Getting Started](#getting_started)
-- [Deployment](#deployment)
 - [Usage](#usage)
 - [Built Using](#built_using)
 - [TODO](../TODO.md)
@@ -42,51 +41,42 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them.
-
-```
-Give examples
-```
+1. MySQL Server [Mac](https://dev.mysql.com/downloads/file/?id=484914)/[Windows](https://dev.mysql.com/downloads/file/?id=484919)
+2. [.NET framework](https://dotnet.microsoft.com/download/dotnet-core/2.2)
+3. An app that can send API Request, such as [Postman](https://www.postman.com/downloads/)
+4. A terminal, such as Powershell or Git Bash
+5. A MySQL manager, such as MySQL Workbench (optional)
+6. A code editor, such as VS Code or Atom (optional)
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
+1. To start, you'll need to acquire the repo, by either clicking the "Download" button or running `git clone https://github.com/Sudolphus/ParkService.Solution`
+2. You'll also need MySql Server and .NET framework installed (linked above)
+3. Once .NET is installed, navigate into the ParkService directory in your terminal of choice and acquire the necessary packages with `dotnet restore`
+4. Install the database with `dotnet ef database update`. For this step to work, you'll need to update the {Password} in appsettings.json with your MySql Password
+5. You can then build the project with `dotnet build`, or run the project directly with `dotnet run`
+6. Once the project is running, you can send api requests using Postman or other requester (see below)
 
 ## 🎈 Usage <a name="usage"></a>
 
-Add notes about how to use the system.
+Once the program is running, you can interact with the database by sending api requests to `localhost:5000/api`.
 
-## 🚀 Deployment <a name = "deployment"></a>
+For example, `GET localhost:5000/api/parks` will return a list of all parks in the database. For a full listing of available commands, see the [Swagger document](#swagger-)
 
-Add additional notes about how to deploy this on a live system.
+
+## Swagger <a name="swagger"></a>
+
+This program uses Swagger to document the available API calls. To access the Swagger page and see a full list of calls, please view `localhost:5000/Swagger` while the project is running.
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
-
+- [MySql Server](https://dev.mysql.com/) - Database
+- [.NET Framework](https://dotnet.microsoft.com/download/dotnet-core/2.2) - Development Framework
+  
 ## ✍️ Authors <a name = "authors"></a>
 
 - [@Micheal Hansen](https://github.com/Sudolphus)
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
+- Thanks to [John Mccann](https://unsplash.com/@jmacca88) for the project image
