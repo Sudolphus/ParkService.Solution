@@ -25,7 +25,7 @@ namespace ParkService.Controllers
     // GET api/parks
     [AllowAnonymous]
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Park>>> Get([FromQuery] ParkFilter filter)
+    public async Task<ActionResult<IEnumerable<Park>>> Get([FromQuery] ParkFilter filter, [FromQuery] PaginationFilter pages)
     {
       IQueryable<Park> parkQuery = _db.Parks;
       PropertyInfo[] searchFields = filter.GetType().GetProperties();
@@ -39,7 +39,10 @@ namespace ParkService.Controllers
           parkQuery = parkQuery.Where(p => search.IsMatch(p.GetPropValues(fieldName)));
         }
       }
-      List<Park> parkList = await parkQuery.ToListAsync();
+      List<Park> parkList = await parkQuery
+        .Skip((pages.PageNumber-1)*pages.PageSize)
+        .Take(pages.PageSize)
+        .ToListAsync();
       return parkList;
     }
 
