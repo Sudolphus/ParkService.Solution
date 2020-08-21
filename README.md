@@ -62,7 +62,16 @@ Once the program is running, you can interact with the database by sending api r
 
 For example, `GET http://localhost:5000/api/parks` will return a list of all parks in the database. For a full listing of available commands, see the [Swagger document](#swagger)
 
+The GET request for parks listed above also supports pagination; for more information, please see [Pagination](#pagination-)
+
 Note that the PUT, POST, and DELETE requests will require authorization, which is done via JWT tokens. For information on acquiring and using a JWT token, please see the section on [Authorization](#token)
+
+
+## Pagination <a name="pagination></a>
+
+This project supports pagination on the GET request. To try it out, send a GET request to parks that includes the page number you want to start at, the page size you'd like to return, or both. For example, `GET http://localhost:5000/api/parks?pageNumber=2&pageSize=5` will return the results starting from page 2 with a page size of 5 entries.
+
+By default, the results for this query will use a default value of 1 for page number and 10 for page size, unless the user specifies a different value.
 
 ## Authorization <a name="token"></a>
 
